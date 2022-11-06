@@ -8,6 +8,7 @@ const port = config.get<number>("port");
 const hostname = config.get<string>("hostname");
 
 const app = express();
+app.use(express.json()); // middleware to parse all the request 
 
 app.listen(port, async () => {
   logger.info(`app server running : http://${hostname}:${port}`);
