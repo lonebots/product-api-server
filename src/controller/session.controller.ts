@@ -1,10 +1,15 @@
 import { Request, Response } from "express";
-import { createSession } from "../service/session.service";
+import { createSession, findSessions } from "../service/session.service";
 import { validatePassword } from "../service/user.service";
 import { signJwt } from "../utils/jwt.utils";
 import config from "config";
+import { createSessionInput } from "../schema/session.schema";
+import { TransformStreamDefaultController } from "stream/web";
 
-export async function createUserSessionHandler(req: Request, res: Response) {
+export async function createUserSessionHandler(
+  req: Request<{}, {}, createSessionInput["body"]>,
+  res: Response
+) {
   // validate user password
   const user = await validatePassword(req.body);
   if (!user) {
@@ -28,4 +33,14 @@ export async function createUserSessionHandler(req: Request, res: Response) {
 
   // return the tokens
   return res.send({ accessToken, refreshToken });
+}
+
+export async function getUserSessionsHandler(req: Request, res: Response) {
+  // we nee a middleware to add the user to the request object everytime
+  const userId = res.locals.user._id;
+  const sessions = await findSessions({
+    user: userId,
+    valid: true,
+  });
+  return res.send(sessions);
 }
