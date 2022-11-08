@@ -8,7 +8,7 @@ import productModel, { productDocument } from "../models/product.model";
 
 // create
 export async function createProduct(
-  input: DocumentDefinition<Omit<productDocument, "createAt" | "updatedAt">>
+  input: DocumentDefinition<Omit<productDocument, "createdAt" | "updatedAt">>
 ) {
   return productModel.create(input);
 }
