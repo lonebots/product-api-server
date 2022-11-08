@@ -1,42 +1,42 @@
 import mongoose from "mongoose";
-import { UserDocument } from "../models/user.model";
 import { customAlphabet } from "nanoid";
+import { UserDocument } from "./user.model";
+import genUniqueId from "../utils/genUniqueId";
 
-const nanoid = customAlphabet("abcdefghijklmnopqrstuvwxyz0123456789", 10); // create a custom alphabet
+//const nanoid = customAlphabet("abcdefghijklmnopqrstuvwxyz0123456789", 10);
 
-// interface
-export interface productDocument extends mongoose.Document {
+export interface ProductInput {
   user: UserDocument["_id"];
   title: string;
   description: string;
   price: number;
   image: string;
+}
+
+export interface ProductDocument extends ProductInput, mongoose.Document {
   createdAt: Date;
   updatedAt: Date;
 }
 
-// schema
 const productSchema = new mongoose.Schema(
   {
     productId: {
       type: String,
       required: true,
       unique: true,
-      default: () => `product_${nanoid}`,
+      default: genUniqueId()|| 'hi',
     },
     user: { type: mongoose.Schema.Types.ObjectId, ref: "User" },
     title: { type: String, required: true },
     description: { type: String, required: true },
     price: { type: Number, required: true },
-    image: { type: String, require: true },
+    image: { type: String, required: true },
   },
   {
     timestamps: true,
   }
 );
 
-// model
-const productModel = mongoose.model<productDocument>("Product", productSchema);
+const ProductModel = mongoose.model<ProductDocument>("Product", productSchema);
 
-// export
-export default productModel;
+export default ProductModel;
