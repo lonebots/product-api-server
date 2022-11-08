@@ -1,5 +1,5 @@
 import { Request, Response } from "express";
-import { createSession, findSessions } from "../service/session.service";
+import { createSession, findSessions, updateSession } from "../service/session.service";
 import { validatePassword } from "../service/user.service";
 import { signJwt } from "../utils/jwt.utils";
 import config from "config";
@@ -35,6 +35,7 @@ export async function createUserSessionHandler(
   return res.send({ accessToken, refreshToken });
 }
 
+// get user sessions
 export async function getUserSessionsHandler(req: Request, res: Response) {
   // we nee a middleware to add the user to the request object everytime
   const userId = res.locals.user._id;
@@ -43,4 +44,14 @@ export async function getUserSessionsHandler(req: Request, res: Response) {
     valid: true,
   });
   return res.send(sessions);
+}
+
+// delete user session
+export async function deleteSessionHandler(req: Request, res: Response) {
+  const sessionId = res.locals.user.session;
+  await updateSession({_id : sessionId},{valid : false}) // session not deleted, its made invalid.
+  return res.send({
+    accessToken: null,
+    refreshToken: null,
+  });
 }
