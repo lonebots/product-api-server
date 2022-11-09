@@ -1,5 +1,5 @@
 
-## Social Media Server
+# Product Maintenance Server
 ### Documentation
 This is the **REST** based API implementation for a **Product** website. More details about the server can be found out in this repository.
 
