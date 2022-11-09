@@ -8,4 +8,7 @@ export default {
   privateKey: `-----BEGIN RSA PRIVATE KEY-----
   blah....blah...blah --> update with your private key
   -----END CERTIFICATE-----`,
+  publicKey: `-----BEGIN RSA PUBLIC KEY-----
+  blah....blah...blah --> update with your private key
+  -----END CERTIFICATE-----`,
 };
