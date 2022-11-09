@@ -1,7 +1,6 @@
 import mongoose from "mongoose";
-import { customAlphabet } from "nanoid";
+import { nanoid } from "nanoid";
 import { UserDocument } from "./user.model";
-import genUniqueId from "../utils/genUniqueId";
 
 //const nanoid = customAlphabet("abcdefghijklmnopqrstuvwxyz0123456789", 10);
 
@@ -24,7 +23,7 @@ const productSchema = new mongoose.Schema(
       type: String,
       required: true,
       unique: true,
-      default: genUniqueId()|| 'hi',
+      default: () => nanoid(10),
     },
     user: { type: mongoose.Schema.Types.ObjectId, ref: "User" },
     title: { type: String, required: true },
