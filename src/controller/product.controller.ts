@@ -74,7 +74,10 @@ export async function deleteProductHandler(
   if (!product) {
     return res.sendStatus(404);
   }
+  console.log(product);
+  console.log(`product.user : ${String(product.user)} || user : ${userId}`);
   if (String(product.user) !== userId) {
+    console.log("product user missmatch");
     return res.sendStatus(403);
   }
   await deleteProduct({ productId });
