@@ -18,7 +18,7 @@
     "jsonwebtoken": "^8.5.1",
     "lodash": "^4.17.21",
     "mongoose": "^6.7.0",
-    "nanoid": "^4.0.0",
+    "nanoid": "^3.1.22",
     "pino": "^8.7.0",
     "pino-pretty": "^9.1.1",
     "zod": "^3.19.1"
