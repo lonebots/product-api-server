@@ -20,7 +20,7 @@ const payload = {
 const params = {
   params: object({
     productId: string({
-      required_error: "ProductID is required",
+      required_error: "Product ID is required",
     }),
   }),
 };
@@ -28,7 +28,6 @@ const params = {
 // export schemas
 export const createProductSchema = object({
   ...payload,
-  ...params,
 });
 
 export const updateProductSchema = object({
