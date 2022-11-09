@@ -23,7 +23,7 @@ The tools used are :
 - **Setup the Repository**
     - clone the git respository
     - update the config variables in the **/config** folder - add the **dbUri**, **privateKey**, **publicKey** 
-    - navigate to the directory **/socialmedia-api-server**
+    - navigate to the directory **/product-api-server**
     - run the command in the terminal `yarn install` followed by `yarn dev`, it will start  the server in the default post or the port you set in the configuration.
 - **Setup the Postman API Service**
     - Go to PostMan App.
